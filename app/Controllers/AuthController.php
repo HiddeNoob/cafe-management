@@ -14,7 +14,7 @@ class AuthController {
         $password = $_POST['password'];
         require_once __DIR__ . '/../Models/Customer.php';
         if (Customer::login($pdo, $username, $password)) {
-            header('Location: /main');
+            header('Location: /dashboard');
         } else {
             throw new Exception("Kullanıcı adı veya şifre yanlış.");
         }

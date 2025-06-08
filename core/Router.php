@@ -26,7 +26,7 @@ public function dispatch(string $uri, string $method) {
     }
 
     http_response_code(404);
-    echo "404 Not Found";
+    include_once __DIR__ . '/../app/Views/not_found.php';
 }
 
 }

@@ -15,6 +15,9 @@ $router->get('', function () {
 });
 
 $router->get('/login', function () {
+    if(isset($_SESSION['user'])){
+        header('Location: /dashboard');
+    }
     try{
         (new AuthController())->showLogin();
     } catch (Exception $e) {
@@ -32,7 +35,6 @@ $router->get('/customer', function () use ($pdo) {
 
 
 $router->post('/login', function () use ($pdo) {
-    session_start();
     try{
         (new AuthController())->login($pdo);
     } catch (Exception $e) {
@@ -41,7 +43,6 @@ $router->post('/login', function () use ($pdo) {
 });
 
 $router->post('/register', function () use ($pdo) {
-    session_start();
     try{
         (new AuthController())->register($pdo);
     }catch (Exception $e) {
@@ -58,9 +59,9 @@ $router->get('/customers', function () use ($pdo) {
     (new CustomerController())->index($pdo);
 });
 
-$router->get('/main', function () {
+$router->get('/dashboard', function () {
     CustomerMiddleware::handle();
-    require_once __DIR__ .'/app/Views/main.php';
+    require_once __DIR__ .'/app/Views/dashboard_customer.php';
 });
 
 $router->get('/session', function () {
