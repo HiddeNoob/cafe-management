@@ -3,3 +3,6 @@
     <input type="password" name="password" placeholder="Şifre"><br>
     <button type="submit">Giriş Yap</button>
 </form>
+<?php
+require_once __DIR__ . '/../Views/showException.php';
+?>
