@@ -7,4 +7,5 @@ class Receipt
     public $employee_id;
     public $receipt_timestamp;
     public $receipt_total_amount;
+
 }
