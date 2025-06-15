@@ -25,7 +25,8 @@
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="card shadow" style="width: 350px;">
             <div class="card-body">
-                <h3 class="card-title text-center mb-4">Giriş Yap</h3>                <form method="POST" action="./">
+                <h3 class="card-title text-center mb-4">Giriş Yap</h3>                
+                <form method="POST" action="./">
                     <div class="mb-3">
                         <input type="text" class="form-control" name="customer_username" placeholder="Kullanıcı Adı" required>
                     </div>
@@ -34,7 +35,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100 mb-2">Giriş Yap</button>
                 </form>
-                <a href="../register" class="btn btn-secondary w-100">Kayıt Ol</a>
+                <a href="../register" class="btn btn-secondary w-100 mb-2">Kayıt Ol</a>
+                <a href="/admin" class="btn btn-warning w-100">Yönetici Girişi</a>
             </div>
         </div>
     </div>

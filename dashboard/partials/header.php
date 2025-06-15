@@ -16,7 +16,7 @@
 <body class="bg-light text-dark d-flex flex-column min-vh-100">
     <header class="bg-white shadow p-4 mb-4">
         <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="h4 fw-bold m-0">Kafe Yönetim Paneli</h1>
+            <h1 class="h4 fw-bold m-0">Müşteri Paneli</h1>
             <nav class="d-flex gap-3">
                 <a href="<?= dirname($_SERVER['PHP_SELF']) === '/dashboard' ? './' : '../' ?>" class="text-primary text-decoration-none">Ana Sayfa</a>
                 <a href="<?= dirname($_SERVER['PHP_SELF']) === '/dashboard' ? 'receipts' : './receipts' ?>" class="text-primary text-decoration-none">Fişlerim</a>

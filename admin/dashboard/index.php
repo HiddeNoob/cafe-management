@@ -6,8 +6,6 @@
 <?php NotificationHandler::display(); ?>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Yönetici Paneli</h2>
-    
     <div class="row">
         <!-- Özet Kartları -->
         <div class="col-md-3 mb-4">
