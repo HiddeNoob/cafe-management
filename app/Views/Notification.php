@@ -1,4 +1,4 @@
-<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; min-width: 300px; z-index: 1080;">
+<div id="notification" aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 1rem; right: 1rem; min-width: 300px; z-index: 1080;">
   <div class="toast align-items-center text-bg-<?= htmlspecialchars($type ?? 'info') ?> border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div id="nf-text" class="toast-body">
@@ -8,3 +8,4 @@
     </div>
   </div>
 </div>
+

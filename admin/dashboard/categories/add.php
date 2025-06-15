@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../app/autoload.php';
-require_once __DIR__ . '/../../../app/Functions/check_employee_access.php';
+AuthController::check_employee_access();
+
 
 $parent_id = $_GET['parent_id'] ?? null;
 
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = $parent_id ? 'Alt Kategori Ekle' : 'Ana Kategori Ekle';
 require_once __DIR__ . '/../partials/header.php';
+NotificationHandler::display();
 ?>
 
 <div class="container py-4">

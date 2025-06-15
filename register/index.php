@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once __DIR__ . '/../app/Functions/log_errors.php';
     require_once __DIR__ .'/../app/autoload.php';
     try {
@@ -44,7 +45,7 @@
         <div class="card shadow" style="width: 400px;">
             <div class="card-body">
                 <h3 class="card-title text-center mb-4">Kayıt Ol</h3>
-                <form method="POST" action="/register/">
+                <form method="POST" class="p-w" action="./">
                     <div class="mb-3">
                         <label for="name" class="form-label">Ad</label>
                         <input type="text" id="name" name="customer_name" class="form-control" required>
@@ -70,11 +71,11 @@
                         <input type="password" id="password" name="customer_password" class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-success w-100">Kayıt Ol</button>
+                    <a href="../login" class="btn btn-primary w-100 mt-2">Giriş Yap</a>
                 </form>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-
+<?php NotificationHandler::display(); ?>

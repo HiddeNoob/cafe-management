@@ -1,10 +1,10 @@
 <?php
     require_once __DIR__ . '/../app/Functions/log_errors.php';
     require_once __DIR__ .'/../app/autoload.php';
+    AuthController::redirect_if_logged_in(Customer::class, '../dashboard');
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Customer login işlemini doğrudan burada yazabilirsin
-        if (Customer::login(DatabaseController::getPDO(), $_POST['customer_username'], $_POST['customer_password'])) {
-            header('Location: /dashboard');
+        if (Customer::login(DatabaseController::getPDO(), $_POST['customer_username'], $_POST['customer_password'])) {            header('Location: ../dashboard');
             exit();
         } else {
             NotificationHandler::notify("Kullanıcı adı veya şifre yanlış.", "danger");
@@ -25,8 +25,7 @@
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="card shadow" style="width: 350px;">
             <div class="card-body">
-                <h3 class="card-title text-center mb-4">Giriş Yap</h3>
-                <form method="POST" action="/login/">
+                <h3 class="card-title text-center mb-4">Giriş Yap</h3>                <form method="POST" action="./">
                     <div class="mb-3">
                         <input type="text" class="form-control" name="customer_username" placeholder="Kullanıcı Adı" required>
                     </div>
@@ -35,11 +34,13 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100 mb-2">Giriş Yap</button>
                 </form>
-                <a href="/register" class="btn btn-secondary w-100">Kayıt Ol</a>
+                <a href="../register" class="btn btn-secondary w-100">Kayıt Ol</a>
             </div>
         </div>
     </div>
 
 </body>
 </html>
+<?php NotificationHandler::display(); ?>
+
 

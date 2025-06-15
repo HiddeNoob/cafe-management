@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../../../app/Functions/check_employee_access.php';
 require_once __DIR__ . '/../../../app/autoload.php';
+AuthController::check_employee_access();
+
 $categories = CategoryRepository::getInstance()->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

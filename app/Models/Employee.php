@@ -6,8 +6,8 @@ class Employee implements IAuth {
 
 
 
-    public static function login(PDO $pdo, string $username, string $password): bool {
-        $employees = EmployeeRepository::getInstance()->findBy(['employee_email' => $username]);
+    public static function login(PDO $pdo, string $email, string $password): bool {
+        $employees = EmployeeRepository::getInstance()->findBy(['employee_email' => $email]);
         if (count($employees) === 1) {
             $employee = $employees[0];
             if (password_verify($password, $employee->employee_password)) {

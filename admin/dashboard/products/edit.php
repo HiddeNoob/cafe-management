@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../../app/Functions/check_employee_access.php';
 require_once __DIR__ . '/../../../app/autoload.php';
+AuthController::check_employee_access();
 $product = null;
 $categories = CategoryRepository::getInstance()->getAll();
 $id = intval($_GET['id'] ?? 0);
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 require_once __DIR__ . '/../partials/header.php';
+NotificationHandler::display();
 ?>
 <div class="container mt-5">
     <h2>Ürün Düzenle</h2>

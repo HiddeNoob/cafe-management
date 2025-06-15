@@ -1,6 +1,7 @@
 <?php
-    $redirect_url = '/admin/dashboard';
-    require_once __DIR__ . '/../app/Functions/redirect_if_logged_in.php';
-    header("Location: ./login/");
+require_once __DIR__ . '/../app/autoload.php';
+AuthController::redirect_if_logged_in(Employee::class, 'dashboard');
+
+header("Location: login");
 
 ?>

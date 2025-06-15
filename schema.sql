@@ -50,7 +50,7 @@ CREATE TABLE `EMPLOYEE` (
   `employee_surname` varchar(32) DEFAULT NULL,
   `employee_phone` varchar(32) DEFAULT NULL,
   `employee_email` varchar(32) DEFAULT NULL UNIQUE, -- UNIQUE kısıtlaması eklendi
-  `employee_password` varchar(32) NOT NULL,
+  `employee_password` TEXT NOT NULL,
   `employee_hire_date` date DEFAULT NULL
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE `PRODUCT` (
   `product_description` text DEFAULT NULL,
   `product_img_url` text DEFAULT NULL,
   `product_name` varchar(32) DEFAULT NULL,
-  `product_price` bigint(20) DEFAULT NULL,
+  `product_price` decimal(10,2) DEFAULT NULL,
   FOREIGN KEY (`category_id`) REFERENCES `CATEGORY` (`category_id`) ON DELETE SET NULL ON UPDATE CASCADE -- Category silindiğinde product'ın category_id'si NULL olsun
 );
 
@@ -93,7 +93,7 @@ CREATE TABLE `RECEIPT` (
   `customer_id` bigint(20) DEFAULT NULL,
   `employee_id` bigint(20) DEFAULT NULL,
   `receipt_timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `receipt_total_amount` bigint(20) DEFAULT NULL,
+  `receipt_total_amount` decimal(10,2) DEFAULT NULL,
   FOREIGN KEY (`customer_id`) REFERENCES `CUSTOMER` (`customer_id`) ON DELETE SET NULL ON UPDATE CASCADE, -- Müşteri silindiğinde veya güncellendiğinde fatura kalır ama customer_id NULL olur
   FOREIGN KEY (`employee_id`) REFERENCES `EMPLOYEE` (`employee_id`) ON DELETE SET NULL ON UPDATE CASCADE -- Çalışan silindiğinde veya güncellendiğinde fatura kalır ama employee_id NULL olur
 );
@@ -102,7 +102,7 @@ CREATE TABLE `RECEIPT_PRODUCTS` (
   `receipt_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `product_quantity` bigint(20) DEFAULT NULL,
-  `product_total_amount` bigint(20) DEFAULT NULL,
+  `product_total_amount` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`receipt_id`,`product_id`),
   FOREIGN KEY (`receipt_id`) REFERENCES `RECEIPT` (`receipt_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`product_id`) REFERENCES `PRODUCT` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE

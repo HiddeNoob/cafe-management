@@ -1,45 +1,46 @@
 <?php
-    require_once __DIR__ . '/../../../app/Functions/log_errors.php';
-    require_once __DIR__ . '/../../../app/Functions/check_employee_access.php';
-    require_once __DIR__ . '/../../../app/autoload.php';
-    $pdo = DatabaseController::getPDO();
-    $category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
+require_once __DIR__ . '/../../../app/autoload.php';
+AuthController::check_employee_access();
+require_once __DIR__ . '/../../../app/Functions/log_errors.php';
+$pdo = DatabaseController::getPDO();
+$category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : null;
 
-    if ($category_id) {
-        $categories = CategoryRepository::getInstance()->findBy(['category_id' => $category_id]);
-        // Alt kategorileri CATEGORY_TREE üzerinden çek
-        $subCategoryIds = CategoryTreeRepository::getInstance()->getSubCategoryIds($category_id);
-        $subCategories = [];
-        if ($subCategoryIds) {
-            $subCategories = CategoryRepository::getInstance()->findBy(['category_id' => $subCategoryIds]);
-        }
-    } else {
-        $categories = CategoryRepository::getInstance()->getAll();
-        $subCategories = [];
+if ($category_id) {
+    $categories = CategoryRepository::getInstance()->findBy(['category_id' => $category_id]);
+    // Alt kategorileri CATEGORY_TREE üzerinden çek
+    $subCategoryIds = CategoryTreeRepository::getInstance()->getSubCategoryIds($category_id);
+    $subCategories = [];
+    if ($subCategoryIds) {
+        $subCategories = CategoryRepository::getInstance()->findBy(['category_id' => $subCategoryIds]);
     }
+} else {
+    $categories = CategoryRepository::getInstance()->getAll();
+    $subCategories = [];
+}
 
-    function renderCategoryTree($parentId = null, $level = 0) {
-        $treeRepo = CategoryTreeRepository::getInstance();
-        $catRepo = CategoryRepository::getInstance();
-        $subCategoryIds = $treeRepo->getSubCategoryIds($parentId);
-        if (!$subCategoryIds) return;
-        $subCategories = $catRepo->findBy(['category_id' => $subCategoryIds]);
-        echo '<ul class="ps-' . (2 + $level) . '">';
-        foreach ($subCategories as $cat) {
-            echo '<li>';
-            echo '<a href="?category_id=' . htmlspecialchars($cat->category_id) . '" class="text-decoration-none">' . htmlspecialchars($cat->category_name) . '</a>';
-            // Recursive call for children
-            renderCategoryTree($cat->category_id, $level + 1);
-            echo '</li>';
-        }
-        echo '</ul>';
+function renderCategoryTree($parentId = null, $level = 0) {
+    $treeRepo = CategoryTreeRepository::getInstance();
+    $catRepo = CategoryRepository::getInstance();
+    $subCategoryIds = $treeRepo->getSubCategoryIds($parentId);
+    if (!$subCategoryIds) return;
+    $subCategories = $catRepo->findBy(['category_id' => $subCategoryIds]);
+    echo '<ul class="ps-' . (2 + $level) . '">';
+    foreach ($subCategories as $cat) {
+        echo '<li>';
+        echo '<a href="?category_id=' . htmlspecialchars($cat->category_id) . '" class="text-decoration-none">' . htmlspecialchars($cat->category_name) . '</a>';
+        // Recursive call for children
+        renderCategoryTree($cat->category_id, $level + 1);
+        echo '</li>';
     }
+    echo '</ul>';
+}
 
-    ?>
+?>
 
 
 <?php
 require_once __DIR__ . '/../partials/header.php';
+NotificationHandler::display();
 ?>
 <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -135,7 +136,7 @@ function renderCategoryAccordion(PDO $pdo) {
                     
                     echo '<span class="fw-bold">#' . htmlspecialchars($cat->category_id) . ' ' . htmlspecialchars($cat->category_name) . '</span>';
                     echo '<div class="btn-group pe-3">';
-                        echo '<a href="add.php?parent_id=' . htmlspecialchars($cat->category_id) . '" class="btn btn-sm btn-success me-2"><i class="bi bi-plus-circle">Alt Kategori Ekle</i></a>';
+                        echo '<a href="add.php?parent_id=' . htmlspecialchars($cat->category_id) . '" class="btn btn-sm btn-success me-2 d-inline"><i class="bi bi-plus-circle">Alt Kategori Ekle</i></a>';
                         echo '<a class="btn btn-sm btn-danger ' . ($subIds ? 'disabled"' : '"') . " onclick=handleRemove($cat->category_id) >"  . '<i class="bi bi-trash"></i> Sil</a>';
                     echo '</div>';
         

@@ -1,15 +1,15 @@
 <?php
     require_once __DIR__ . '/../../../app/Functions/log_errors.php';
-    require_once __DIR__ . '/../../../app/Functions/check_employee_access.php';
     require_once __DIR__ . '/../../../app/autoload.php';
+    AuthController::check_employee_access();
     $products = ProductRepository::getInstance()->getAll();
 ?>
 <?php 
     require_once __DIR__ . '/../partials/header.php';
+    NotificationHandler::display();
 ?>
 
 <div class="container mt-5">
-    <?php NotificationHandler::display(); ?>
     <h2 class="mb-4">Ürünler</h2>
     <div class="mb-3">
         <a href="add.php" class="btn btn-success">+ Yeni Ürün Ekle</a>
@@ -33,7 +33,7 @@
                     <th scope="row" class="text-secondary"><?= htmlspecialchars($product->product_id) ?></th>
                     <td>
     <?php if ($product->category_id): ?>
-        <a href="/admin/dashboard/categories/index.php?category_id=<?= htmlspecialchars($product->category_id) ?>" class="badge bg-info text-dark text-decoration-none">
+        <a href="../categories/index.php?category_id=<?= htmlspecialchars($product->category_id) ?>" class="badge bg-info text-dark text-decoration-none">
             #<?= htmlspecialchars($product->category_id) ?>
         </a>
     <?php else: ?>
