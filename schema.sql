@@ -1,11 +1,7 @@
 -- Mevcut tabloları sil (varsa)
 DROP TABLE IF EXISTS `RECEIPT_PRODUCTS`;
 DROP TABLE IF EXISTS `RECEIPT`;
-DROP TABLE IF EXISTS `PRODUCT_INGREDIENT`;
 DROP TABLE IF EXISTS `PRODUCT`;
-DROP TABLE IF EXISTS `INGREDIENT`;
-DROP TABLE IF EXISTS `EMPLOYEE_HISTORY`;
-DROP TABLE IF EXISTS `ADDRESS`;
 DROP TABLE IF EXISTS `EMPLOYEE`;
 DROP TABLE IF EXISTS `CUSTOMER`;
 DROP TABLE IF EXISTS `CATEGORY_TREE`;
@@ -13,13 +9,6 @@ DROP TABLE IF EXISTS `CATEGORY`;
 
 begin;
 
-CREATE TABLE `ADDRESS` (
-  `employee_id` bigint(20) NOT NULL PRIMARY KEY,
-  `address` varchar(150) DEFAULT NULL,
-  `locality` varchar(32) DEFAULT NULL,
-  `province` varchar(32) DEFAULT NULL,
-  `postal_code` varchar(32) DEFAULT NULL
-);
 
 CREATE TABLE `CATEGORY` (
   `category_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -54,19 +43,7 @@ CREATE TABLE `EMPLOYEE` (
   `employee_hire_date` date DEFAULT NULL
 );
 
-CREATE TABLE `EMPLOYEE_HISTORY` (
-  `history_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `employee_id` bigint(20) DEFAULT NULL,
-  `employee_start_date` date DEFAULT NULL,
-  `employee_end_date` date DEFAULT NULL,
-  `employee_salary` decimal(10,2) DEFAULT NULL,
-  FOREIGN KEY (`employee_id`) REFERENCES `EMPLOYEE` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
-CREATE TABLE `INGREDIENT` (
-  `ingredient_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `ingredient_name` varchar(32) DEFAULT NULL
-);
 
 CREATE TABLE `PRODUCT` (
   `product_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -78,15 +55,6 @@ CREATE TABLE `PRODUCT` (
   FOREIGN KEY (`category_id`) REFERENCES `CATEGORY` (`category_id`) ON DELETE SET NULL ON UPDATE CASCADE -- Category silindiğinde product'ın category_id'si NULL olsun
 );
 
-CREATE TABLE `PRODUCT_INGREDIENT` (
-  `product_id` bigint(20) NOT NULL,
-  `ingredient_id` bigint(20) NOT NULL,
-  `ingredient_amount` bigint(20) DEFAULT NULL,
-  `ingredient_amount_type` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`product_id`,`ingredient_id`),
-  FOREIGN KEY (`product_id`) REFERENCES `PRODUCT` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`ingredient_id`) REFERENCES `INGREDIENT` (`ingredient_id`) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 CREATE TABLE `RECEIPT` (
   `receipt_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -38,32 +38,6 @@ INSERT INTO `EMPLOYEE` (`employee_id`, `employee_name`, `employee_surname`, `emp
 (2, 'Burak', 'Aslan', '5415556677', 'burak.aslan@cafe.com', 'parola456', '2022-11-01'),
 (3, 'Cem', 'Polat', '5078889900', 'cem.polat@cafe.com', 'gizlisifre', '2024-03-20');
 
--- ADDRESS Tablosu için Dummy Veri (EMPLOYEE'ye bağlı)
-INSERT INTO `ADDRESS` (`employee_id`, `address`, `locality`, `province`, `postal_code`) VALUES
-(1, 'Cumhuriyet Cd. No:10 D:5', 'Kızılay', 'Ankara', '06420'),
-(2, 'Atatürk Blv. No:15 Kat:3', 'Çankaya', 'Ankara', '06680'),
-(3, 'Tunali Hilmi Cd. No:20', 'Kavaklıdere', 'Ankara', '06700');
-
--- EMPLOYEE_HISTORY Tablosu için Dummy Veri
-INSERT INTO `EMPLOYEE_HISTORY` (`history_id`, `employee_id`, `employee_start_date`, `employee_end_date`, `employee_salary`) VALUES
-(1, 1, '2023-01-15', '2024-01-15', 18000.00),
-(2, 2, '2022-11-01', '2023-11-01', 17000.00),
-(3, 1, '2024-01-16', NULL, 20000.00);
-
--- INGREDIENT Tablosu için Dummy Veri
-INSERT INTO `INGREDIENT` (`ingredient_id`, `ingredient_name`) VALUES
-(1, 'Süt'),
-(2, 'Kahve Çekirdeği'),
-(3, 'Espresso'),
-(4, 'Karamel Şurubu'),
-(5, 'Vanilya Şurubu'),
-(6, 'Çikolata Şurubu'),
-(7, 'Buz'),
-(8, 'Su'),
-(9, 'Şeker'),
-(10, 'Krema'),
-(11, 'Çay Yaprağı'),
-(12, 'Somon Füme');
 
 -- PRODUCT Tablosu için Dummy Veri
 INSERT INTO `PRODUCT` (`product_id`, `category_id`, `product_description`, `product_img_url`, `product_name`, `product_price`) VALUES
@@ -80,21 +54,7 @@ INSERT INTO `PRODUCT` (`product_id`, `category_id`, `product_description`, `prod
 (11, 3, 'Buzlu latte', 'url_iced_latte.jpg', 'Iced Latte', 55),
 (12, 11, 'Yeşil salata', 'url_green_salad.jpg', 'Mevsim Salatası', 60);
 
--- PRODUCT_INGREDIENT Tablosu için Dummy Veri
-INSERT INTO `PRODUCT_INGREDIENT` (`product_id`, `ingredient_id`, `ingredient_amount`, `ingredient_amount_type`) VALUES
-(1, 1, 200, 'ml'), -- Latte: Süt
-(1, 3, 30, 'ml'),  -- Latte: Espresso
-(2, 3, 60, 'ml'),  -- Espresso: Espresso
-(3, 1, 150, 'ml'), -- Buzlu Karamel Macchiato: Süt
-(3, 3, 30, 'ml'),  -- Buzlu Karamel Macchiato: Espresso
-(3, 4, 20, 'ml'),  -- Buzlu Karamel Macchiato: Karamel Şurubu
-(3, 7, 150, 'gr'), -- Buzlu Karamel Macchiato: Buz
-(4, 8, 250, 'ml'), -- Türk Çayı: Su
-(4, 9, 5, 'gr'),   -- Türk Çayı: Şeker
-(4, 11, 3, 'gr'),  -- Türk Çayı: Çay Yaprağı
-(11, 1, 200, 'ml'), -- Iced Latte: Süt
-(11, 3, 30, 'ml'),  -- Iced Latte: Espresso
-(11, 7, 200, 'gr'); -- Iced Latte: Buz
+
 
 -- RECEIPT Tablosu için Dummy Veri
 INSERT INTO `RECEIPT` (`receipt_id`, `customer_id`, `employee_id`, `receipt_timestamp`, `receipt_total_amount`) VALUES
